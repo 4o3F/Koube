@@ -12,14 +12,14 @@ func authSuccess(ctx *fiber.Ctx) error {
 	return ctx.Next()
 }
 
-func authError(ctx *fiber.Ctx, err error) error {
+func authError(ctx *fiber.Ctx, _ error) error {
 	return sendCommonResponse(ctx, 403, "Wrong API key", nil)
 }
 
 func authValidator(ctx *fiber.Ctx, _ string) (bool, error) {
 	apiAuthKey, ok := ctx.GetReqHeaders()["Authorization"]
 	if ok {
-		if apiAuthKey == utils.KoubeConfig.APIAuthKey {
+		if apiAuthKey[7:] == utils.KoubeConfig.APIAuthKey {
 			return true, nil
 		} else {
 			return false, nil
@@ -31,13 +31,18 @@ func authValidator(ctx *fiber.Ctx, _ string) (bool, error) {
 func InitHandlers(app *fiber.App) {
 	app.Use(keyauth.New(keyauth.Config{
 		KeyLookup:      "header:Authorization",
+		AuthScheme:     "Bearer",
 		SuccessHandler: authSuccess,
 		ErrorHandler:   authError,
-		AuthScheme:     "",
 		Validator:      authValidator,
 	}))
 
-	app.Post("/api/data/gen", genAudienceData)
+	app.Post("/api/audience/checkEntranceCode", checkEntranceCode)
+	app.Post("/api/audience/checkVerifyCode", checkVerifyCode)
+
+	app.Get("/api/common/getEntranceCodeSalt", getEntranceCodeSalt)
+
+	app.Post("/api/audience/enter", audienceEnter)
 
 	utils.KoubeLogger.Info().Msg("Init handlers complete")
 }

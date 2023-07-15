@@ -1,0 +1,10 @@
+api_auth_key: apiauthkey
+entrance_code_salt: entrancecodesalt
+generation_complete: true
+max_audience_count: 2000
+max_entrance_code_length: 10
+max_verify_code_length: 5
+port: :7000
+verify_code_salt: verifycodesalt
+show_start_time: 1689390000 # Unix Timestamp
+access_allow_duration: 3600 # second

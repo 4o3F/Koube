@@ -9,4 +9,6 @@ type KoubeConfig struct {
 	APIAuthKey            string `mapstructure:"api_auth_key"`
 	MaxAudienceCount      int    `mapstructure:"max_audience_count"`
 	GenerationComplete    bool   `mapstructure:"generation_complete"`
+	ShowStartTime         int64  `mapstructure:"show_start_time"`
+	AccessAllowDuration   int64  `mapstructure:"access_allow_duration"`
 }
