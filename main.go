@@ -14,7 +14,7 @@ func main() {
 
 	utils.InitUtils()
 	database.InitDatabase()
-	handlers.InitHandlers()
+	handlers.InitHandlers(app)
 
 	err := app.Listen(utils.KoubeConfig.Port)
 	if err != nil {

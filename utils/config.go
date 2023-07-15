@@ -21,3 +21,13 @@ func initConfig() {
 	}
 	KoubeLogger.Info().Msg("Init config complete")
 }
+
+func SwitchAudienceGenerationStatus() error {
+	KoubeConfig.GenerationComplete = !KoubeConfig.GenerationComplete
+	viper.Set("generation_complete", KoubeConfig.GenerationComplete)
+	err := viper.WriteConfig()
+	if err != nil {
+		return err
+	}
+	return nil
+}
