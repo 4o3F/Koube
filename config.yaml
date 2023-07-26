@@ -1,10 +1,19 @@
+# Key used as bearer auth header
 api_auth_key: apiauthkey
+# Salt for entrance code generation
 entrance_code_salt: entrancecodesalt
+# Mark the status of entrance code generation
 generation_complete: true
+# Used to control the max generation count of audience, should be higher than the estimated audience count
 max_audience_count: 2000
+# Used to cut SHA256 hash, too low will cause hash collision, should be set according to max_audience_count
 max_entrance_code_length: 10
 max_verify_code_length: 5
+# Port for web server
 port: :7000
+# Salt for verify code generation
 verify_code_salt: verifycodesalt
-show_start_time: 1689390000 # Unix Timestamp
+# Unix Timestamp for the show_start_time
+show_start_time: 1689390000
+# Seconds before the show_start_time, that the entrance code salt will be given
 access_allow_duration: 3600 # second
