@@ -40,7 +40,7 @@ func InitHandlers(app *fiber.App) {
 	app.Post("/api/audience/checkEntranceCode", checkEntranceCode)
 	app.Post("/api/audience/checkVerifyCode", checkVerifyCode)
 
-	app.Get("/api/common/getEntranceCodeSalt", getEntranceCodeSalt)
+	app.Get("/api/common/getEntranceCodeConfig", getEntranceCodeConfig)
 
 	app.Post("/api/audience/enter", audienceEnter)
 

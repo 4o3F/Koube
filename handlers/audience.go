@@ -43,13 +43,14 @@ func checkVerifyCode(ctx *fiber.Ctx) error {
 	}
 }
 
-func getEntranceCodeSalt(ctx *fiber.Ctx) error {
+func getEntranceCodeConfig(ctx *fiber.Ctx) error {
 	currentTime := time.Now().Unix()
 	if utils.KoubeConfig.ShowStartTime-currentTime > utils.KoubeConfig.AccessAllowDuration {
 		return sendCommonResponse(ctx, 403, "未到开放时间", nil)
 	} else {
 		return sendCommonResponse(ctx, 200, "获取成功", map[string]interface{}{
-			"salt": utils.KoubeConfig.EntranceCodeSalt,
+			"length": utils.KoubeConfig.MaxEntranceCodeLength,
+			"salt":   utils.KoubeConfig.EntranceCodeSalt,
 		})
 	}
 }
